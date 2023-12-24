@@ -22,11 +22,11 @@ class ArrayCollectionHydrationExtension extends AbstractDoctrineHydrationExtensi
     public function hydrate(mixed $value, string $className): ?object
     {
         $output = new ArrayCollection();
-        foreach ($value as $object) {
-            $object = $this->findObject($object['class'], $object['identifierValues']);
+        foreach ($value as $item) {
+            $object = $this->findObject($item['class'], $item['identifierValues']);
 
-            if($object instanceof $object['class']::class) {
-                $output->add($this->findObject($object['class'], $object['identifierValues']));
+            if($object) {
+                $output->add($object);
             }
         }
 
